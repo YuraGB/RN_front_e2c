@@ -1,10 +1,16 @@
-import { View } from "tamagui";
-import { Menu } from "./topMenu";
+import { Separator, View } from "tamagui";
+import { Menu } from "@/components/topMenu";
+import { Search } from "@/components/search";
 
 export const Header = () => {
   return (
-    <View justifyContent='space-between' padding={10}>
-      <Menu />
+    <View>
+      <Separator />
+      <View justifyContent="space-around" padding={10} flexDirection={"row"}>
+        <Search />
+        <Menu />
+      </View>
+      <Separator />
     </View>
   );
 };

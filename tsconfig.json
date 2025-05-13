@@ -4,6 +4,7 @@
     "jsxImportSource": "nativewind",
     "strict": true,
     "jsx": "react-native",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
     }

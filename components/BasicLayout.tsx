@@ -1,4 +1,4 @@
-import { checkAuthThunk } from "@/store/authThunks";
+import { checkAuthThunk } from "@/store/auth/authThunks";
 import { useAppDispatch } from "@/store/hooks";
 import { Stack } from "expo-router";
 import { useEffect } from "react";
@@ -37,25 +37,25 @@ export const BasicLayout = () => {
       }}
     >
       <Stack.Screen
-        name='(tabs)'
+        name="(tabs)"
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name='(withTabs)'
+        name="(withTabs)"
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name='product/[id]'
+        name="product/[id]"
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name='category/[name]'
+        name="category/[name]"
         options={{
           headerShown: false,
         }}

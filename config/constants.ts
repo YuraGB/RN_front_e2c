@@ -18,3 +18,5 @@ export const CATEGORY_BY_NAME_QUERY = "/category?name=";
 export const LOGIN_QUERY = "/auth/login/";
 
 export const REGISTER_QUERY = "/auth/register/";
+
+export const PROFILE_QUERY = "/profile";

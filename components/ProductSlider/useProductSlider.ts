@@ -1,4 +1,4 @@
-import { useGetProductsQuery } from "@/store/productsApi";
+import { useGetProductsQuery } from "@/store/product/productsApi";
 
 export type TProductSliderQuery = { query: string };
 

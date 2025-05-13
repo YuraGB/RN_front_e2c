@@ -2,7 +2,7 @@ import type { SizeTokens } from "tamagui";
 import { z } from "zod";
 import { Button, Fieldset, Input, Spinner, Text, YStack } from "tamagui";
 import { useFormHook } from "@/hooks/useFormHook";
-import { useLoginUserMutation } from "@/store/authApi";
+import { useLoginUserMutation } from "@/store/auth/authApi";
 import { useEffect } from "react";
 import { storage } from "@/utils/getPlatform";
 
@@ -34,27 +34,27 @@ export function LoginForm(props: { size?: SizeTokens }) {
   }, [data]);
 
   return (
-    <YStack $gap={"$4"} padding='$4' flex={1}>
-      <Text fontSize='$6' fontWeight='600' marginBottom={15}>
+    <YStack $gap={"$4"} padding="$4" flex={1}>
+      <Text fontSize="$6" fontWeight="600" marginBottom={15}>
         Login form
       </Text>
 
       <Fieldset style={{ marginBottom: 25 }}>
         <Input
-          placeholder='Email'
+          placeholder="Email"
           onChangeText={(text) => setValue("email", text)}
-          autoCapitalize='none'
+          autoCapitalize="none"
         />
-        {errors.email && <Text color='red'>{errors.email.message}</Text>}
+        {errors.email && <Text color="red">{errors.email.message}</Text>}
       </Fieldset>
 
       <Fieldset style={{ marginBottom: 25 }}>
         <Input
-          placeholder='Пароль'
+          placeholder="Пароль"
           onChangeText={(text) => setValue("password", text)}
           secureTextEntry
         />
-        {errors.password && <Text color='red'>{errors.password.message}</Text>}
+        {errors.password && <Text color="red">{errors.password.message}</Text>}
       </Fieldset>
 
       <Button
