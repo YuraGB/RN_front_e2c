@@ -3,18 +3,17 @@ import React from "react";
 import { useForm, UseFormReturn } from "react-hook-form";
 import { z, ZodSchema } from "zod";
 
-type FormStatus = "off" | "submitting" | "submitted";
-
 export const useFormHook = <T extends z.infer<Z>, Z extends ZodSchema<any>>(
-  schema: Z
+  schema: Z,
+  initialValues?: T,
 ) => {
   const {
-    register,
     handleSubmit,
     setValue,
     formState: { errors },
   }: UseFormReturn<T> = useForm<T>({
     resolver: zodResolver(schema),
+    defaultValues: initialValues,
   });
 
   const [status, setStatus] = React.useState<

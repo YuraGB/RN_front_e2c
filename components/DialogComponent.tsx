@@ -29,16 +29,16 @@ function DialogInstance(props: TDialogProps) {
       <Dialog.Trigger asChild>{buttonTrigger}</Dialog.Trigger>
 
       {!disableAdapt && (
-        <Adapt when={true} platform='touch'>
-          <Sheet animation='medium' zIndex={200000} modal dismissOnSnapToBottom>
-            <Sheet.Frame padding='$4' gap='$4'>
+        <Adapt when={true} platform="touch">
+          <Sheet animation="medium" modal dismissOnSnapToBottom>
+            <Sheet.Frame padding="$4" gap="$4">
               <Adapt.Contents />
             </Sheet.Frame>
             <Sheet.Overlay
-              backgroundColor='$shadow6'
-              animation='lazy'
+              backgroundColor="$shadow6"
+              animation="lazy"
               enterStyle={{ opacity: 0 }}
-              exitStyle={{ opacity: 0 }}
+              exitStyle={{ opacity: 0, zIndex: -1 }}
             />
           </Sheet>
         </Adapt>
@@ -47,8 +47,8 @@ function DialogInstance(props: TDialogProps) {
       <Dialog.Portal>
         <Dialog.Overlay
           onPress={onClose}
-          key='overlay'
-          backgroundColor='$shadow6'
+          key="overlay"
+          backgroundColor="$shadow6"
           animateOnly={["transform", "opacity"]}
           animation={[
             "quicker",
@@ -59,7 +59,7 @@ function DialogInstance(props: TDialogProps) {
             },
           ]}
           enterStyle={{ opacity: 0, scale: 0.95 }}
-          exitStyle={{ opacity: 0 }}
+          exitStyle={{ opacity: 0, zIndex: -1 }}
         />
 
         <Dialog.Content
@@ -67,7 +67,7 @@ function DialogInstance(props: TDialogProps) {
           width={400}
           height={400}
           elevate
-          key='content'
+          key="content"
           animateOnly={["transform", "opacity"]}
           animation={[
             "quicker",
@@ -79,7 +79,7 @@ function DialogInstance(props: TDialogProps) {
           ]}
           enterStyle={{ x: 0, y: -20, opacity: 0 }}
           exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
-          gap='$4'
+          gap="$4"
         >
           {dialogTitle ? <Dialog.Title>{dialogTitle}</Dialog.Title> : null}
 
@@ -90,7 +90,7 @@ function DialogInstance(props: TDialogProps) {
           {children}
 
           {dialogActionComponent ? (
-            <XStack alignSelf='flex-end' gap='$4'>
+            <XStack alignSelf="flex-end" gap="$4">
               <Dialog.Close displayWhenAdapted asChild>
                 {dialogActionComponent}
               </Dialog.Close>
@@ -100,10 +100,10 @@ function DialogInstance(props: TDialogProps) {
           <Unspaced>
             <Dialog.Close asChild>
               <Button
-                position='absolute'
-                top='$3'
-                right='$3'
-                size='$2'
+                position="absolute"
+                top="$3"
+                right="$3"
+                size="$2"
                 circular
                 icon={<AntDesign name={"close"} />}
                 onPress={onClose}

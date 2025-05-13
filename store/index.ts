@@ -1,10 +1,12 @@
 // store/index.ts
 import { configureStore } from "@reduxjs/toolkit";
-import { authApi } from "./authApi";
-import authReducer from "./authSlice";
-import { productsApi } from "./productsApi";
-import { postsApi } from "./postsApi";
-import { categoryApi } from "./categoryApi";
+import { authApi } from "./auth/authApi";
+import authReducer from "./auth/authSlice";
+import checkoutReducer from "./checkout/checkoutSlice";
+import { productsApi } from "./product/productsApi";
+import { postsApi } from "./post/postsApi";
+import { categoryApi } from "./category/categoryApi";
+import { searchApi } from "./search/searchApi";
 
 export const store = configureStore({
   reducer: {
@@ -12,14 +14,17 @@ export const store = configureStore({
     [productsApi.reducerPath]: productsApi.reducer,
     [postsApi.reducerPath]: postsApi.reducer,
     [categoryApi.reducerPath]: categoryApi.reducer,
+    [searchApi.reducerPath]: searchApi.reducer,
     auth: authReducer,
+    checkout: checkoutReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authApi.middleware,
       productsApi.middleware,
       postsApi.middleware,
-      categoryApi.middleware
+      categoryApi.middleware,
+      searchApi.middleware,
     ),
 });
 

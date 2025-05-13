@@ -1,9 +1,9 @@
 import { ReactNode, useState } from "react";
 import { SafeAreaView, View, RefreshControl } from "react-native";
 import { ScrollView } from "tamagui";
-import { Menu } from "@/components/topMenu";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Footer from "@/components/footer";
+import { Header } from "@/components/Header";
 
 const ScrollViewComponentBase = ({ children }: { children: ReactNode }) => {
   const [refreshing, setRefreshing] = useState(false);
@@ -31,7 +31,7 @@ const ScrollViewComponentBase = ({ children }: { children: ReactNode }) => {
           style={{ flex: 1 }}
         >
           <View style={{ flex: 1 }}>
-            <Menu />
+            <Header />
             {children}
             <Footer />
           </View>

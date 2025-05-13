@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { PageTitle } from "@/components/PageTitle";
 import ProductCard from "@/components/productCard";
-import { useGetCategoryByNameQuery } from "@/store/categoryApi";
+import { useGetCategoryByNameQuery } from "@/store/category/categoryApi";
 import { TProduct } from "@/types/product";
 import { useLocalSearchParams } from "expo-router";
 import { lazy, Suspense } from "react";
@@ -24,7 +24,7 @@ export default function Category() {
     return (
       <PageTitle
         title={
-          <Text className='font-bold text-2xl'>Category has no products</Text>
+          <Text className="font-bold text-2xl">Category has no products</Text>
         }
       />
     );
@@ -40,11 +40,11 @@ export default function Category() {
       numColumns={2}
       key={numColumns}
       ListHeaderComponent={
-        <View className='pt-16'>
+        <View className="pt-16">
           <Header />
           <PageTitle
             title={
-              <Text className='font-bold text-2xl'>
+              <Text className="font-bold text-2xl">
                 Category {titleCapitilized}
               </Text>
             }
@@ -58,7 +58,7 @@ export default function Category() {
       }
       keyExtractor={(item) => item.id.toString()}
       renderItem={({ item }: { item: TProduct }) => (
-        <TouchableOpacity className='w-1/2 p-0'>
+        <TouchableOpacity className="w-1/2 p-0">
           <ProductCard
             {...item}
             id={item.id.toString()}
