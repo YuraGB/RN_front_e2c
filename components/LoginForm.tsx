@@ -5,6 +5,8 @@ import { useFormHook } from "@/hooks/useFormHook";
 import { useLoginUserMutation } from "@/store/auth/authApi";
 import { useEffect } from "react";
 import { storage } from "@/utils/getPlatform";
+import { useAppDispatch } from "@/store/hooks";
+import { setIsAuthenticated, setUser } from "@/store/auth/authSlice";
 
 const loginSchema = z.object({
   email: z.string().email("Incorrect e-mail"),
@@ -18,6 +20,7 @@ export function LoginForm(props: { size?: SizeTokens }) {
     LoginFormData,
     typeof loginSchema
   >(loginSchema);
+  const dispatch = useAppDispatch();
 
   const [loginAction, { data }] = useLoginUserMutation();
 
@@ -28,13 +31,15 @@ export function LoginForm(props: { size?: SizeTokens }) {
   };
 
   useEffect(() => {
-    if (data) {
-      storage.setItem("accessToken", data.token);
+    if (data?.user?.token) {
+      storage.setItem("accessToken", data.user.token);
+      dispatch(setUser(data.user));
+      dispatch(setIsAuthenticated(true));
     }
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
-    <YStack $gap={"$4"} padding="$4" flex={1}>
+    <YStack padding="$4" flex={1}>
       <Text fontSize="$6" fontWeight="600" marginBottom={15}>
         Login form
       </Text>

@@ -1,4 +1,5 @@
 import { checkAuthThunk } from "@/store/auth/authThunks";
+import { getBasket } from "@/store/basket/basketThunk";
 import { useAppDispatch } from "@/store/hooks";
 import { Stack } from "expo-router";
 import { useEffect } from "react";
@@ -8,6 +9,7 @@ export const BasicLayout = () => {
 
   useEffect(() => {
     dispatch(checkAuthThunk());
+    dispatch(getBasket());
   }, [dispatch]);
 
   return (
@@ -36,30 +38,36 @@ export const BasicLayout = () => {
         statusBarStyle: "auto",
       }}
     >
-      <Stack.Screen
-        name="(tabs)"
+      {/* <Stack.Screen
+        name='(tabs)'
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
+      {/* <Stack.Screen
+        name='checkout/checkout'
+        options={{
+          headerShown: false,
+        }}
+      /> */}
       <Stack.Screen
         name="(withTabs)"
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="product/[id]"
+      {/* <Stack.Screen
+        name='product/[id]'
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="category/[name]"
+        name='category/[name]'
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
     </Stack>
   );
 };

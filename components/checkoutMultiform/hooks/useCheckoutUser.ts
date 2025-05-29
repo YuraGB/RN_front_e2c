@@ -1,5 +1,5 @@
 import { useFormHook } from "@/hooks/useFormHook";
-import { useAppSelector } from "@/store//hooks";
+import { useAppDispatch, useAppSelector } from "@/store//hooks";
 import { checkoutUserSchecma, TCheckoutUser } from "../validators";
 import {
   setCheckoutStep,
@@ -9,19 +9,21 @@ import {
 export const useCheckoutUser = () => {
   const user = useAppSelector((state) => state.auth.user);
   const currentStep = useAppSelector((state) => state.checkout.currentStep);
+  const dispatch = useAppDispatch();
 
-  const { setValue, errors, handleSubmit, status, setStatus } = useFormHook<
-    TCheckoutUser,
-    typeof checkoutUserSchecma
-  >(checkoutUserSchecma, {
-    email: user?.email || "",
-  });
+  const { setValue, errors, handleSubmit, status, setStatus, control } =
+    useFormHook<TCheckoutUser, typeof checkoutUserSchecma>(
+      checkoutUserSchecma,
+      {
+        email: user?.email || "",
+      },
+    );
 
   const onSubmit = async (data: TCheckoutUser) => {
     setStatus("submitting");
-    setCheckoutUser(data);
+    dispatch(setCheckoutUser(data));
     setStatus("submitted");
-    setCheckoutStep(currentStep + 1);
+    dispatch(setCheckoutStep(currentStep + 1));
   };
 
   return {
@@ -29,5 +31,6 @@ export const useCheckoutUser = () => {
     errors,
     onSubmitAction: handleSubmit(onSubmit),
     status,
+    control,
   };
 };

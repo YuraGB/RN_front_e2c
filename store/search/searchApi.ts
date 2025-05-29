@@ -7,7 +7,7 @@ export const searchApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     getSearchResalts: builder.query<TProduct[], string>({
-      query: (arg: string) => `/search/query=${arg}`,
+      query: (arg: string) => `/search?q=${arg}`,
     }),
   }),
 });

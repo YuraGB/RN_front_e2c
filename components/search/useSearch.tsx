@@ -12,13 +12,15 @@ export const useSearch = () => {
   const onChangeHandler = (
     e: NativeSyntheticEvent<TextInputChangeEventData>,
   ) => {
+    const text = e.nativeEvent.text;
+
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
 
     timerRef.current = setTimeout(() => {
-      if (e.nativeEvent.text?.length > 3) {
-        getSearchAction(e.nativeEvent.text);
+      if (text?.length > 3) {
+        getSearchAction(text);
       }
     }, 300);
   };

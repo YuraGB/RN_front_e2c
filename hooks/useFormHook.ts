@@ -9,6 +9,8 @@ export const useFormHook = <T extends z.infer<Z>, Z extends ZodSchema<any>>(
 ) => {
   const {
     handleSubmit,
+    control,
+    reset,
     setValue,
     formState: { errors },
   }: UseFormReturn<T> = useForm<T>({
@@ -26,5 +28,7 @@ export const useFormHook = <T extends z.infer<Z>, Z extends ZodSchema<any>>(
     errors,
     setValue,
     handleSubmit,
+    control,
+    reset,
   };
 };

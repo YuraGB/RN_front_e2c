@@ -15,7 +15,7 @@ const SearchForm = ({
   onChangeHandler: (e: NativeSyntheticEvent<TextInputChangeEventData>) => void;
 }): ReactNode => {
   return (
-    <YStack>
+    <YStack overflow="hidden" position="relative">
       <Fieldset marginBottom={20}>
         <Input
           placeholder="Search term"
@@ -28,7 +28,7 @@ const SearchForm = ({
       <Button icon={<FontAwesome5 name={"search"} />} marginBottom={20}>
         Find
       </Button>
-      <SearchResults data={searchResults} />
+      <SearchResults data={searchResults} onClosePopup={onClose} />
     </YStack>
   );
 };

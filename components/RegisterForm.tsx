@@ -30,13 +30,14 @@ export function RegisterForm(props: { size?: SizeTokens }) {
   };
 
   useEffect(() => {
-    if (data) {
-      storage.setItem("accessToken", data.token);
+    console.log("Register data", data);
+    if (data?.user?.token) {
+      storage.setItem("accessToken", data.user.token);
     }
   }, [data]);
 
   return (
-    <YStack $gap={"$4"} padding="$4" flex={1}>
+    <YStack padding="$4" flex={1}>
       <Text fontSize="$6" fontWeight="600" marginBottom={15}>
         Registration form
       </Text>

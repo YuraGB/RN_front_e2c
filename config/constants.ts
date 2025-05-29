@@ -20,3 +20,5 @@ export const LOGIN_QUERY = "/auth/login/";
 export const REGISTER_QUERY = "/auth/register/";
 
 export const PROFILE_QUERY = "/profile";
+
+export const SET_ORDER_QUERY = "/order/create/";

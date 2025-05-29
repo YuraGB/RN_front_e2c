@@ -1,5 +1,5 @@
 import { useFormHook } from "@/hooks/useFormHook";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { paymentMethodSchema, TPayment } from "../validators";
 import {
   setCheckoutStep,
@@ -8,6 +8,7 @@ import {
 
 export const usePayment = () => {
   const currentStep = useAppSelector((state) => state.checkout.currentStep);
+  const dispatch = useAppDispatch();
 
   const { setValue, errors, handleSubmit, status, setStatus } = useFormHook<
     TPayment,
@@ -15,14 +16,15 @@ export const usePayment = () => {
   >(paymentMethodSchema);
 
   const onSubmit = async (data: TPayment) => {
+    console.log("Payment data", data);
     // loader
     setStatus("submitting");
     //set data to the state
-    setPaymentMethod(data);
+    dispatch(setPaymentMethod(data));
     // turn off loader
     setStatus("submitted");
     // next step
-    setCheckoutStep(currentStep + 1);
+    dispatch(setCheckoutStep(currentStep + 1));
   };
 
   return {

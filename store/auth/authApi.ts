@@ -5,6 +5,7 @@ import { LoginFormData } from "@/components/LoginForm";
 import { RegisterFormData } from "@/components/RegisterForm";
 import { LOGIN_QUERY, PROFILE_QUERY, REGISTER_QUERY } from "@/config/constants";
 import { User } from "@/types/user";
+import { mergeBasket } from "../basket/basketThunk";
 
 export const authApi = createApi({
   reducerPath: "authApi",
@@ -13,19 +14,43 @@ export const authApi = createApi({
     getProfile: builder.query({
       query: () => PROFILE_QUERY,
     }),
-    loginUser: builder.mutation<User, LoginFormData>({
+    loginUser: builder.mutation<{ user: User }, LoginFormData>({
       query: (body) => ({
         url: LOGIN_QUERY,
         method: "POST",
         body,
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // ✅ Логін успішний, запускаємо асинхронний thunk для завантаження корзини
+          if (data) {
+            dispatch(mergeBasket());
+          }
+        } catch (err) {
+          console.error("Login error:", err);
+          // ❌ Можна також зробити toast або setError
+        }
+      },
     }),
-    registerUser: builder.mutation<User, RegisterFormData>({
+    registerUser: builder.mutation<{ user: User }, RegisterFormData>({
       query: (body: RegisterFormData) => ({
         url: REGISTER_QUERY,
         method: "POST",
         body,
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // ✅ Логін успішний, запускаємо асинхронний thunk для завантаження корзини
+          if (data) {
+            dispatch(mergeBasket());
+          }
+        } catch (err) {
+          console.error("Login error:", err);
+          // ❌ Можна також зробити toast або setError
+        }
+      },
     }),
   }),
 });

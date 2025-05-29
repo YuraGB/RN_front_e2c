@@ -65,7 +65,8 @@ function DialogInstance(props: TDialogProps) {
         <Dialog.Content
           bordered
           width={400}
-          height={400}
+          height={700}
+          overflow="visible"
           elevate
           key="content"
           animateOnly={["transform", "opacity"]}

@@ -6,7 +6,7 @@ export const checkoutUserSchecma = z.object({
 
 export const deliveryAdressSchecma = z.object({
   city: z.string(),
-  zipCode: z.number(),
+  zipCode: z.string(),
   address: z.string(),
 });
 
