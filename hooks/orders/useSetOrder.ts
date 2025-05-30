@@ -29,6 +29,7 @@ export const useSetOrder = () => {
     // Logic to set the order will go here
     const { currentUser, deliveryAddress, paymentMethod } = checkoutData;
 
+    // todo user can be anonymus
     // Ensure all required data is available before proceeding
     if (
       !currentUser ||

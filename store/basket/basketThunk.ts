@@ -8,6 +8,7 @@ import { API_URL } from "@/config/constants";
 import basketApi from "./basketApi";
 import { formatItem, mapBasketState } from "@/utils/mapBasketState";
 import { BasketState, TItem } from "@/types/basket";
+import { AppState } from "react-native";
 
 export const getBasket = createAsyncThunk(
   "basket/getBasket",
@@ -175,19 +176,25 @@ export const getBasketProductList = createAsyncThunk(
   // If the user is logged in, it fetches the product list from the server
   // If the user is not logged in, it does nothing
   // It then dispatches the setProductList action with the fetched data
-  async (_, { dispatch }) => {
+  async (_, { dispatch, getState }) => {
+    let productIds;
     try {
       const token = await storage.getItem("accessToken");
-      if (token === null || token === undefined || token === "undefined")
-        return;
+
+      // if user is not logged in set the local basket items Id's into query
+      // to fetch products
+      if (token === null || token === undefined || token === "undefined") {
+        const state = getState() as RootState;
+        productIds = state.basket.items.map((item) => item.productId).join();
+      }
     } catch (error) {
       console.error("Error get token from the store", error);
     }
 
     try {
-      // If the user is logged in, fetch the product list from the server
+      // fetch products for the product list in the basket
       const result = await dispatch(
-        basketApi.endpoints.getBasketProductList.initiate(),
+        basketApi.endpoints.getBasketProductList.initiate(productIds),
       ).unwrap();
 
       // If the product list is not empty, set it in the state

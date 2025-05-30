@@ -37,8 +37,9 @@ const basketApi = createApi({
         body: basket,
       }),
     }),
-    getBasketProductList: builder.query<TProductBasket[], void>({
-      query: () => "/basket/productList/",
+    getBasketProductList: builder.query<TProductBasket[], string | void>({
+      query: (param) =>
+        param ? `/basket/productList?ids=${param}` : "/basket/productList/",
     }),
   }),
 });

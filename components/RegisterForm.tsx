@@ -3,17 +3,7 @@ import { z } from "zod";
 import { Button, Fieldset, Input, Spinner, Text, YStack } from "tamagui";
 import { useFormHook } from "@/hooks/useFormHook";
 import { useRegisterUserMutation } from "@/store/auth/authApi";
-import { useEffect } from "react";
-import { storage } from "@/utils/getPlatform";
-
-const ReisterSchema = z.object({
-  username: z.string(),
-  lastname: z.string(),
-  email: z.string().email("Incorrect e-mail"),
-  password: z.string().min(6, "At least 6 symbols"),
-});
-
-export type RegisterFormData = z.infer<typeof ReisterSchema>;
+import { RegisterFormData, ReisterSchema } from "@/types/register";
 
 export function RegisterForm(props: { size?: SizeTokens }) {
   const { setValue, errors, handleSubmit, status, setStatus } = useFormHook<
@@ -21,20 +11,13 @@ export function RegisterForm(props: { size?: SizeTokens }) {
     typeof ReisterSchema
   >(ReisterSchema);
 
-  const [onRegisterAction, { data }] = useRegisterUserMutation();
+  const [onRegisterAction] = useRegisterUserMutation();
 
   const onSubmit = async (data: RegisterFormData) => {
     setStatus("submitting");
     await onRegisterAction(data);
     setStatus("submitted");
   };
-
-  useEffect(() => {
-    console.log("Register data", data);
-    if (data?.user?.token) {
-      storage.setItem("accessToken", data.user.token);
-    }
-  }, [data]);
 
   return (
     <YStack padding="$4" flex={1}>

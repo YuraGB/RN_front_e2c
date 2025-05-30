@@ -14,10 +14,6 @@ export const BasketItem = ({ item }: { item: TProductBasket }) => {
         padding={10}
         borderBottomWidth={1}
         borderBottomColor="#ccc"
-        gridColumn={2}
-        style={{
-          display: "grid",
-        }}
       >
         <Image
           source={{ uri: item.thumbnail }}

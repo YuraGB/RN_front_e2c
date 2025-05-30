@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { TouchableOpacity } from "react-native";
 import { Button, Card, H4, Image, Paragraph, Text, XStack } from "tamagui";
 import type { CardProps } from "tamagui";
-import { useAddToCard } from "../../hooks/addToCard/useAddToCard";
+import { useAddToCard } from "@/hooks/addToCard/useAddToCard";
 
 // CardProps have conflict with id field as number
 type ProductCardProps = CardProps &
